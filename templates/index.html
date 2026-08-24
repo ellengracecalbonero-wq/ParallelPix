@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ParallelPix | Home</title>
+
+    <link
+        rel="icon"
+        type="image/png"
+        href="{{ url_for('static', filename='favicon/parallelpix.png') }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+</head>
+
+<body>
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<nav class="navbar">
+
+    <div class="brand">
+
+        <div class="logo-box">
+            P
+        </div>
+
+        <span>ParallelPix</span>
+
+    </div>
+
+    <div class="nav-links">
+
+        <a href="{{ url_for('index') }}" class="active">
+            Home
+        </a>
+
+        <a href="{{ url_for('dashboard') }}">
+            Processing
+        </a>
+
+        <a href="#features">
+            Features
+        </a>
+
+        {% if session.get("user_id") %}
+
+            <span class="user-name">
+                {{ session.get("fullname") }}
+            </span>
+
+            <a
+                href="{{ url_for('logout') }}"
+                class="register-btn"
+            >
+                Logout
+            </a>
+
+        {% else %}
+
+            <a href="{{ url_for('login') }}">
+                Login
+            </a>
+
+            <a
+                href="{{ url_for('register') }}"
+                class="register-btn"
+            >
+                Register
+            </a>
+
+        {% endif %}
+
+    </div>
+
+</nav>
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="home-hero">
+
+    <div class="home-hero-content">
+
+        <div class="home-text">
+
+            <span class="status-badge">
+                ● PARALLEL COMPUTING SYSTEM
+            </span>
+
+            <p class="eyebrow">
+                PARALLEL AND DISTRIBUTED COMPUTING
+            </p>
+
+            <h1>
+                Parallel Image Processing
+                <span>and Performance Analysis</span>
+            </h1>
+
+            <p class="description">
+                A web-based system demonstrating
+                data-parallel and task-parallel image
+                processing using multiple workers and
+                performance analysis.
+            </p>
+
+            <div class="hero-buttons">
+
+                {% if session.get("user_id") %}
+
+                    <a
+                        href="{{ url_for('dashboard') }}"
+                        class="primary-btn"
+                    >
+                        Go to Dashboard
+                        <span>→</span>
+                    </a>
+
+                {% else %}
+
+                    <a
+                        href="{{ url_for('login') }}"
+                        class="primary-btn"
+                    >
+                        Get Started
+                        <span>→</span>
+                    </a>
+
+                    <a
+                        href="#features"
+                        class="secondary-btn"
+                    >
+                        Explore System
+                    </a>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             VISUAL
+        ========================= -->
+
+        <div class="home-visual">
+
+            <div class="visual-card">
+
+                <div class="visual-header">
+
+                    <div>
+
+                        <span>
+                            PARALLELPIX
+                        </span>
+
+                        <h3>
+                            Image Processing
+                        </h3>
+
+                    </div>
+
+                    <div class="live-dot">
+                        ● LIVE
+                    </div>
+
+                </div>
+
+
+                <!-- Pipeline -->
+
+                <div class="home-pipeline">
+
+                    <div class="home-stage">
+
+                        <div class="stage-number">
+                            01
+                        </div>
+
+                        <strong>
+                            Resize
+                        </strong>
+
+                        <small>
+                            Worker 1
+                        </small>
+
+                    </div>
+
+
+                    <div class="pipeline-arrow">
+                        →
+                    </div>
+
+
+                    <div class="home-stage">
+
+                        <div class="stage-number">
+                            02
+                        </div>
+
+                        <strong>
+                            Grayscale
+                        </strong>
+
+                        <small>
+                            Worker 2
+                        </small>
+
+                    </div>
+
+
+                    <div class="pipeline-arrow">
+                        →
+                    </div>
+
+
+                    <div class="home-stage">
+
+                        <div class="stage-number">
+                            03
+                        </div>
+
+                        <strong>
+                            Noise Reduction
+                        </strong>
+
+                        <small>
+                            Worker 3
+                        </small>
+
+                    </div>
+
+
+                    <div class="pipeline-arrow">
+                        →
+                    </div>
+
+
+                    <div class="home-stage">
+
+                        <div class="stage-number">
+                            04
+                        </div>
+
+                        <strong>
+                            Face Detection
+                        </strong>
+
+                        <small>
+                            Worker 4
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Worker Status -->
+
+                <div class="worker-panel">
+
+                    <div class="worker-panel-title">
+                        ACTIVE WORKERS
+                    </div>
+
+                    <div class="worker-list">
+
+                        <div class="worker-item">
+                            <span class="worker-circle">
+                                1
+                            </span>
+
+                            <span>
+                                Worker 1
+                            </span>
+
+                            <b>
+                                READY
+                            </b>
+                        </div>
+
+
+                        <div class="worker-item">
+                            <span class="worker-circle">
+                                2
+                            </span>
+
+                            <span>
+                                Worker 2
+                            </span>
+
+                            <b>
+                                READY
+                            </b>
+                        </div>
+
+
+                        <div class="worker-item">
+                            <span class="worker-circle">
+                                3
+                            </span>
+
+                            <span>
+                                Worker 3
+                            </span>
+
+                            <b>
+                                READY
+                            </b>
+                        </div>
+
+
+                        <div class="worker-item">
+                            <span class="worker-circle">
+                                4
+                            </span>
+
+                            <span>
+                                Worker 4
+                            </span>
+
+                            <b>
+                                READY
+                            </b>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     FEATURES
+========================= -->
+
+<section
+    class="home-features"
+    id="features"
+>
+
+    <div class="section-heading home-heading">
+
+        <span class="card-label">
+            SYSTEM CAPABILITIES
+        </span>
+
+        <h2>
+            Built for Parallel Processing
+        </h2>
+
+        <p>
+            Explore how ParallelPix demonstrates
+            parallel and distributed computing concepts.
+        </p>
+
+    </div>
+
+
+    <div class="home-feature-grid">
+
+
+        <div class="home-feature-card">
+
+            <div class="feature-number">
+                01
+            </div>
+
+            <div class="feature-icon">
+                ⇄
+            </div>
+
+            <h3>
+                Data Parallelism
+            </h3>
+
+            <p>
+                Multiple images are distributed among
+                workers and processed concurrently,
+                demonstrating data-parallel execution.
+            </p>
+
+        </div>
+
+
+        <div class="home-feature-card">
+
+            <div class="feature-number">
+                02
+            </div>
+
+            <div class="feature-icon">
+                ⚙
+            </div>
+
+            <h3>
+                Task Pipeline
+            </h3>
+
+            <p>
+                Image operations are organized into
+                processing stages where different tasks
+                can work simultaneously.
+            </p>
+
+        </div>
+
+
+        <div class="home-feature-card">
+
+            <div class="feature-number">
+                03
+            </div>
+
+            <div class="feature-icon">
+                ↗
+            </div>
+
+            <h3>
+                Performance Analysis
+            </h3>
+
+            <p>
+                Compare sequential and parallel execution
+                using speedup and efficiency metrics.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     CTA
+========================= -->
+
+<section class="home-cta">
+
+    <div>
+
+        <span>
+            READY TO PROCESS?
+        </span>
+
+        <h2>
+            Experience Parallel Image Processing
+        </h2>
+
+        <p>
+            Upload an image and see how multiple
+            workers can improve processing performance.
+        </p>
+
+    </div>
+
+
+    <a
+        href="{{ url_for('dashboard') }}"
+        class="cta-button"
+    >
+        Open Dashboard →
+    </a>
+
+</section>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer class="home-footer">
+
+    <div class="footer-brand">
+
+        <div class="logo-box">
+            P
+        </div>
+
+        <span>
+            ParallelPix
+        </span>
+
+    </div>
+
+    <p>
+        Parallel Image Processing and Performance Analysis
+    </p>
+
+</footer>
+
+</body>
+</html>

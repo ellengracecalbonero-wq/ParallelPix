@@ -1,0 +1,7 @@
+@"
+__pycache__/
+*.pyc
+uploads/*
+processed/*
+.env
+"@ | Out-File -Encoding utf8 .gitignore

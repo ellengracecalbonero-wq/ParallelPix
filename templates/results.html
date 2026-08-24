@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Performance Analysis | ParallelPix </title>
+     
+    <link
+        rel="icon"
+        type="image/png"
+        href="{{ url_for('static', filename='favicon/parallelpix.png') }}"
+    >    
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- ==================================================
+     NAVBAR
+================================================== -->
+
+<nav class="navbar">
+
+    <div class="brand">
+
+        <div class="logo-box">
+            P
+        </div>
+
+        <span>
+            ParallelPix
+        </span>
+
+    </div>
+
+
+    <div class="nav-links">
+
+        <a href="{{ url_for('index') }}">
+            Home
+        </a>
+
+        <a href="{{ url_for('dashboard') }}">
+            Processing
+        </a>
+
+        <a href="#performance">
+            Performance
+        </a>
+
+        <span class="user-name">
+            {{ session.get("fullname") }}
+        </span>
+
+        <a
+            href="{{ url_for('logout') }}"
+            class="register-btn"
+        >
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+
+
+<!-- ==================================================
+     HERO
+================================================== -->
+
+<section class="results-hero">
+
+    <div class="results-hero-content">
+
+        <div class="status-badge">
+            <span>●</span>
+            PROCESSING COMPLETE
+        </div>
+
+        <p class="eyebrow">
+            PARALLELPIX PERFORMANCE ANALYSIS
+        </p>
+
+        <h1>
+            Sequential vs
+            <span>Parallel</span>
+        </h1>
+
+        <p>
+            Compare execution time and measure the
+            performance of parallel image processing.
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- ==================================================
+     MAIN CONTENT
+================================================== -->
+
+<main
+    class="results-container"
+    id="performance"
+>
+
+
+<!-- ==================================================
+     WORKERS
+================================================== -->
+
+<section class="results-card">
+
+    <div class="results-card-header">
+
+        <div>
+
+            <span class="card-label">
+                PROCESSING CONFIGURATION
+            </span>
+
+            <h2>
+                Parallel Workers
+            </h2>
+
+        </div>
+
+        <div class="card-icon">
+            ⚙
+        </div>
+
+    </div>
+
+
+    <div class="worker-results">
+
+
+        <div class="result-worker">
+
+            <div class="worker-circle">
+                1
+            </div>
+
+            <div>
+
+                <strong>
+                    Worker 1
+                </strong>
+
+                <span>
+                    Completed
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="result-worker">
+
+            <div class="worker-circle">
+                2
+            </div>
+
+            <div>
+
+                <strong>
+                    Worker 2
+                </strong>
+
+                <span>
+                    Completed
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="result-worker">
+
+            <div class="worker-circle">
+                3
+            </div>
+
+            <div>
+
+                <strong>
+                    Worker 3
+                </strong>
+
+                <span>
+                    Completed
+                </span>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- ==================================================
+     PERFORMANCE METRICS
+================================================== -->
+
+<section class="results-performance">
+
+
+    <div class="result-metric">
+
+        <div class="metric-icon">
+            S
+        </div>
+
+        <span>
+            SEQUENTIAL TIME
+        </span>
+
+        <strong>
+            {{ "%.6f"|format(sequential_time) }}
+        </strong>
+
+        <small>
+            seconds
+        </small>
+
+    </div>
+
+
+
+    <div class="result-metric">
+
+        <div class="metric-icon">
+            P
+        </div>
+
+        <span>
+            PARALLEL TIME
+        </span>
+
+        <strong>
+            {{ "%.6f"|format(parallel_time) }}
+        </strong>
+
+        <small>
+            seconds
+        </small>
+
+    </div>
+
+
+
+    <div class="result-metric highlight-metric">
+
+        <div class="metric-icon">
+            ×
+        </div>
+
+        <span>
+            SPEEDUP
+        </span>
+
+        <strong>
+            {{ "%.2f"|format(speedup) }}×
+        </strong>
+
+        <small>
+            Performance improvement
+        </small>
+
+    </div>
+
+
+
+    <div class="result-metric">
+
+        <div class="metric-icon">
+            %
+        </div>
+
+        <span>
+            EFFICIENCY
+        </span>
+
+        <strong>
+            {{ "%.2f"|format(efficiency) }}%
+        </strong>
+
+        <small>
+            Worker efficiency
+        </small>
+
+    </div>
+
+
+</section>
+
+
+
+<!-- ==================================================
+     WORKER COUNT
+================================================== -->
+
+<section class="worker-count-card">
+
+    <div>
+
+        <span>
+            NUMBER OF WORKERS
+        </span>
+
+        <strong>
+            {{ workers }}
+        </strong>
+
+    </div>
+
+
+    <div class="worker-count-description">
+
+        <span>
+            PARALLEL EXECUTION
+        </span>
+
+        <p>
+            The image-processing workload was distributed
+            across {{ workers }} parallel workers.
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- ==================================================
+     PROCESSED IMAGES
+================================================== -->
+
+<section class="image-results">
+
+
+    <div class="section-heading">
+
+        <span class="card-label">
+            PROCESSING OUTPUT
+        </span>
+
+        <h2>
+            Processed Images
+        </h2>
+
+        <p>
+            View the results produced by each processing stage.
+        </p>
+
+    </div>
+
+
+    <div class="image-result-grid">
+
+
+        <!-- ORIGINAL -->
+
+        <div class="image-result-card">
+
+            <div class="image-result-header">
+
+                <span class="image-step">
+                    ORIGINAL
+                </span>
+
+                <span class="image-status source">
+                    SOURCE
+                </span>
+
+            </div>
+
+
+            <div class="image-preview-result">
+
+                <img
+                    src="{{ url_for('uploaded_file', filename=original) }}"
+                    alt="Original Image"
+                >
+
+            </div>
+
+
+            <h3>
+                Original Image
+            </h3>
+
+            <p>
+                {{ original }}
+            </p>
+
+        </div>
+
+
+
+        <!-- RESIZED -->
+
+        <div class="image-result-card">
+
+            <div class="image-result-header">
+
+                <span class="image-step">
+                    STAGE 01
+                </span>
+
+                <span class="image-status">
+                    RESIZED
+                </span>
+
+            </div>
+
+
+            <div class="image-preview-result">
+
+                <img
+                    src="{{ url_for('processed_file', filename=resized) }}"
+                    alt="Resized Image"
+                >
+
+            </div>
+
+
+            <h3>
+                Resized
+            </h3>
+
+            <p>
+                Image resized successfully.
+            </p>
+
+        </div>
+
+
+
+        <!-- GRAYSCALE -->
+
+        <div class="image-result-card">
+
+            <div class="image-result-header">
+
+                <span class="image-step">
+                    STAGE 02
+                </span>
+
+                <span class="image-status">
+                    GRAYSCALE
+                </span>
+
+            </div>
+
+
+            <div class="image-preview-result">
+
+                <img
+                    src="{{ url_for('processed_file', filename=grayscale) }}"
+                    alt="Grayscale Image"
+                >
+
+            </div>
+
+
+            <h3>
+                Grayscale
+            </h3>
+
+            <p>
+                Grayscale conversion completed.
+            </p>
+
+        </div>
+
+
+
+        <!-- NOISE REDUCTION -->
+
+        <div class="image-result-card">
+
+            <div class="image-result-header">
+
+                <span class="image-step">
+                    STAGE 03
+                </span>
+
+                <span class="image-status">
+                    COMPLETE
+                </span>
+
+            </div>
+
+
+            <div class="image-preview-result">
+
+                <img
+                    src="{{ url_for('processed_file', filename=noise_reduced) }}"
+                    alt="Noise Reduced Image"
+                >
+
+            </div>
+
+
+            <h3>
+                Noise Reduction
+            </h3>
+
+            <p>
+                Noise reduction completed successfully.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- ==================================================
+     INTERPRETATION
+================================================== -->
+
+<section class="interpretation-card">
+
+    <div class="interpretation-icon">
+        i
+    </div>
+
+
+    <div>
+
+        <span class="card-label">
+            PERFORMANCE INTERPRETATION
+        </span>
+
+        <h2>
+            What do the results mean?
+        </h2>
+
+        <p>
+            {{ interpretation }}
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- ==================================================
+     BUTTONS
+================================================== -->
+
+<section class="result-actions">
+
+    <a
+        href="{{ url_for('dashboard') }}"
+        class="result-primary-btn"
+    >
+        ← Process Another Image
+    </a>
+
+
+    <a
+        href="{{ url_for('index') }}"
+        class="result-secondary-btn"
+    >
+        Back to Home
+    </a>
+
+</section>
+
+
+</main>
+
+
+
+<!-- ==================================================
+     FOOTER
+================================================== -->
+
+<footer class="home-footer">
+
+    <div class="footer-brand">
+
+        <div class="logo-box">
+            P
+        </div>
+
+        <span>
+            ParallelPix
+        </span>
+
+    </div>
+
+
+    <p>
+        Parallel Image Processing and Performance Analysis
+    </p>
+
+</footer>
+
+
+</body>
+
+</html>

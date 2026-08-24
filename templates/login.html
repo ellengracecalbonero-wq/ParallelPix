@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Login | ParallelPix</title>
+
+    <link
+        rel="icon"
+        type="image/png"
+        href="{{ url_for('static', filename='favicon/parallelpix.png') }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+
+</head>
+
+<body class="auth-body">
+
+    <div class="auth-wrapper">
+
+        <!-- LEFT SIDE -->
+
+        <div class="auth-brand-panel">
+
+            <div class="auth-brand">
+
+                <div class="auth-logo">
+                    P
+                </div>
+
+                <span>
+                    ParallelPix
+                </span>
+
+            </div>
+
+            <div class="auth-brand-content">
+
+                <span class="auth-small-title">
+                    PARALLEL AND DISTRIBUTED COMPUTING
+                </span>
+
+                <h1>
+                    Process smarter.
+                    <span>Work in parallel.</span>
+                </h1>
+
+                <p>
+                    A web-based platform for demonstrating
+                    parallel image processing and performance
+                    analysis using multiple workers.
+                </p>
+
+                <div class="auth-stat-row">
+
+                    <div>
+                        <strong>03</strong>
+                        <span>Workers</span>
+                    </div>
+
+                    <div>
+                        <strong>04</strong>
+                        <span>Stages</span>
+                    </div>
+
+                    <div>
+                        <strong>01</strong>
+                        <span>System</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- RIGHT SIDE -->
+
+        <div class="auth-form-panel">
+
+            <div class="auth-form-container">
+
+                <div class="mobile-auth-brand">
+
+                    <div class="auth-logo">
+                        P
+                    </div>
+
+                    <span>
+                        ParallelPix
+                    </span>
+
+                </div>
+
+
+                <div class="auth-heading">
+
+                    <span class="auth-label">
+                        WELCOME BACK
+                    </span>
+
+                    <h2>
+                        Sign in to ParallelPix
+                    </h2>
+
+                    <p>
+                        Enter your account details to continue.
+                    </p>
+
+                </div>
+
+
+                {% if error %}
+
+                <div class="auth-error">
+                    {{ error }}
+                </div>
+
+                {% endif %}
+
+
+                <form
+                    method="POST"
+                    action="{{ url_for('login') }}"
+                >
+
+                    <div class="form-group">
+
+                        <label for="username">
+                            Username
+                        </label>
+
+                        <input
+                            type="text"
+                            id="username"
+                            name="username"
+                            placeholder="Enter your username"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="password">
+                            Password
+                        </label>
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Enter your password"
+                            required
+                        >
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="auth-submit"
+                    >
+                        Sign In
+                        <span>→</span>
+                    </button>
+
+                </form>
+
+
+                <div class="auth-divider">
+                    <span>OR</span>
+                </div>
+
+
+                <p class="auth-switch">
+
+                    Don't have an account?
+
+                    <a href="{{ url_for('register') }}">
+                        Create an account
+                    </a>
+
+                </p>
+
+
+                <a
+                    href="{{ url_for('index') }}"
+                    class="back-home"
+                >
+                    ← Back to Home
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

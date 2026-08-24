@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard | ParallelPix</title>
+
+    <link
+        rel="icon"
+        type="image/png"
+        href="{{ url_for('static', filename='favicon/parallelpix.png') }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+</head>
+
+<body>
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<nav class="navbar">
+
+    <div class="brand">
+
+        <div class="logo-box">
+            P
+        </div>
+
+        <span>ParallelPix</span>
+
+    </div>
+
+    <div class="nav-links">
+
+        <a href="{{ url_for('index') }}">
+            Home
+        </a>
+
+        <a href="#processing">
+            Processing
+        </a>
+
+        <a href="#performance">
+            Performance
+        </a>
+
+        <span class="user-name">
+            {{ fullname }}
+        </span>
+
+        <a
+            href="{{ url_for('logout') }}"
+            class="register-btn"
+        >
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="dashboard-hero">
+
+    <div class="dashboard-hero-content">
+
+        <div class="hero-content">
+
+            <span class="status-badge">
+                ● SYSTEM READY
+            </span>
+
+            <p class="eyebrow">
+                PARALLEL IMAGE PROCESSING SYSTEM
+            </p>
+
+            <h1>
+                Welcome back,
+                <span>{{ fullname }}</span>
+            </h1>
+
+            <p class="hero-description">
+                Upload your image and let ParallelPix
+                demonstrate the power of parallel
+                image processing.
+            </p>
+
+        </div>
+
+        <div class="dashboard-icon">
+
+            <div class="icon-ring">
+
+                <div class="icon-center">
+                    P
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<main>
+
+
+<!-- =========================
+     PROCESSING
+========================= -->
+
+<section
+    class="dashboard-container"
+    id="processing"
+>
+
+
+    <!-- UPLOAD -->
+
+    <div class="main-card upload-card">
+
+        <div class="card-title">
+
+            <div>
+
+                <span class="card-label">
+                    STEP 01
+                </span>
+
+                <h2>
+                    Upload Image
+                </h2>
+
+                <p>
+                    Choose an image to process.
+                </p>
+
+            </div>
+
+            <div class="card-icon">
+                ↑
+            </div>
+
+        </div>
+
+
+        <form
+            action="{{ url_for('process') }}"
+            method="POST"
+            enctype="multipart/form-data"
+            id="uploadForm"
+        >
+
+            <label
+                for="image"
+                class="drop-zone"
+                id="dropZone"
+            >
+
+                <div class="upload-circle">
+                    ↑
+                </div>
+
+                <h3>
+                    Drop your image here
+                </h3>
+
+                <p>
+                    or click to browse from your computer
+                </p>
+
+                <span>
+                    JPG • JPEG • PNG • BMP • WEBP
+                </span>
+
+            </label>
+
+
+            <input
+                type="file"
+                id="image"
+                name="image"
+                accept="image/*"
+                hidden
+                required
+            >
+
+
+            <!-- PREVIEW -->
+
+            <div
+                class="preview-box"
+                id="imagePreview"
+            >
+
+                <div class="preview-image-container">
+
+                    <img
+                        id="previewImage"
+                        src=""
+                        alt="Image preview"
+                    >
+
+                </div>
+
+                <div class="preview-details">
+
+                    <span class="preview-label">
+                        SELECTED IMAGE
+                    </span>
+
+                    <h3 id="fileName">
+                        Image
+                    </h3>
+
+                    <p id="fileSize">
+                    </p>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="remove-image"
+                    id="removeImage"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <!-- PROCESS -->
+
+            <button
+                type="submit"
+                class="process-btn"
+                id="processButton"
+            >
+
+                <span class="button-icon">
+                    ⚡
+                </span>
+
+                <span>
+                    Start Parallel Processing
+                </span>
+
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <!-- PIPELINE -->
+
+    <div class="main-card pipeline-card-modern">
+
+        <div class="card-title">
+
+            <div>
+
+                <span class="card-label">
+                    STEP 02
+                </span>
+
+                <h2>
+                    Processing Pipeline
+                </h2>
+
+                <p>
+                    Three workers process tasks simultaneously.
+                </p>
+
+            </div>
+
+            <div class="card-icon">
+                ⚙
+            </div>
+
+        </div>
+
+
+        <div class="pipeline-modern">
+
+
+            <div class="pipeline-item">
+
+                <div class="pipeline-number">
+                    01
+                </div>
+
+                <div>
+
+                    <h3>
+                        Resize
+                    </h3>
+
+                    <p>
+                        Worker 1
+                    </p>
+
+                </div>
+
+                <span class="worker-status">
+                    READY
+                </span>
+
+            </div>
+
+
+            <div class="pipeline-item">
+
+                <div class="pipeline-number">
+                    02
+                </div>
+
+                <div>
+
+                    <h3>
+                        Grayscale
+                    </h3>
+
+                    <p>
+                        Worker 2
+                    </p>
+
+                </div>
+
+                <span class="worker-status">
+                    READY
+                </span>
+
+            </div>
+
+
+            <div class="pipeline-item">
+
+                <div class="pipeline-number">
+                    03
+                </div>
+
+                <div>
+
+                    <h3>
+                        Noise Reduction
+                    </h3>
+
+                    <p>
+                        Worker 3
+                    </p>
+
+                </div>
+
+                <span class="worker-status">
+                    READY
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="worker-summary">
+
+            <div>
+
+                <span>
+                    Active Workers
+                </span>
+
+                <strong>
+                    3
+                </strong>
+
+            </div>
+
+            <div>
+
+                <span>
+                    Processing Mode
+                </span>
+
+                <strong>
+                    Parallel
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     PERFORMANCE
+========================= -->
+
+<section
+    class="performance-section"
+    id="performance"
+>
+
+    <div class="section-heading">
+
+        <span class="card-label">
+            STEP 03
+        </span>
+
+        <h2>
+            Performance Analysis
+        </h2>
+
+        <p>
+            Compare sequential and parallel execution.
+        </p>
+
+    </div>
+
+
+    <div class="performance-grid">
+
+
+        <div class="performance-card">
+
+            <div class="performance-icon">
+                S
+            </div>
+
+            <span>
+                SEQUENTIAL TIME
+            </span>
+
+            <strong>
+                —
+            </strong>
+
+            <small>
+                Baseline execution
+            </small>
+
+        </div>
+
+
+        <div class="performance-card">
+
+            <div class="performance-icon">
+                P
+            </div>
+
+            <span>
+                PARALLEL TIME
+            </span>
+
+            <strong>
+                —
+            </strong>
+
+            <small>
+                Multi-worker execution
+            </small>
+
+        </div>
+
+
+        <div class="performance-card highlight">
+
+            <div class="performance-icon">
+                ×
+            </div>
+
+            <span>
+                SPEEDUP
+            </span>
+
+            <strong>
+                —
+            </strong>
+
+            <small>
+                Sequential ÷ Parallel
+            </small>
+
+        </div>
+
+
+        <div class="performance-card">
+
+            <div class="performance-icon">
+                %
+            </div>
+
+            <span>
+                EFFICIENCY
+            </span>
+
+            <strong>
+                —
+            </strong>
+
+            <small>
+                Worker efficiency
+            </small>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     INFORMATION
+========================= -->
+
+<section class="info-section">
+
+    <div class="info-card-modern">
+
+        <div class="info-symbol">
+            i
+        </div>
+
+        <div>
+
+            <h3>
+                How ParallelPix Works
+            </h3>
+
+            <p>
+                ParallelPix divides image-processing
+                operations between multiple workers.
+                Instead of completing every operation
+                one after another, independent tasks
+                can execute concurrently.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
+<script>
+
+const imageInput =
+    document.getElementById("image");
+
+const preview =
+    document.getElementById("imagePreview");
+
+const previewImage =
+    document.getElementById("previewImage");
+
+const fileName =
+    document.getElementById("fileName");
+
+const fileSize =
+    document.getElementById("fileSize");
+
+const removeImage =
+    document.getElementById("removeImage");
+
+const uploadForm =
+    document.getElementById("uploadForm");
+
+const processButton =
+    document.getElementById("processButton");
+
+
+/* IMAGE SELECT */
+
+imageInput.addEventListener(
+    "change",
+    function () {
+
+        const file = this.files[0];
+
+        if (!file) {
+            return;
+        }
+
+        fileName.textContent =
+            file.name;
+
+        fileSize.textContent =
+            (file.size / 1024).toFixed(1)
+            + " KB";
+
+        const reader =
+            new FileReader();
+
+        reader.onload =
+            function (event) {
+
+                previewImage.src =
+                    event.target.result;
+
+                preview.classList.add(
+                    "show"
+                );
+
+            };
+
+        reader.readAsDataURL(file);
+
+    }
+);
+
+
+/* REMOVE IMAGE */
+
+removeImage.addEventListener(
+    "click",
+    function () {
+
+        imageInput.value = "";
+
+        preview.classList.remove(
+            "show"
+        );
+
+    }
+);
+
+
+/* PROCESSING */
+
+uploadForm.addEventListener(
+    "submit",
+    function () {
+
+        processButton.disabled = true;
+
+        processButton.innerHTML =
+            '<span class="loading-spinner"></span>' +
+            ' Processing image...';
+
+    }
+);
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Register | ParallelPix</title>
+    
+    <link
+        rel="icon"
+        type="image/png"
+        href="{{ url_for('static', filename='favicon/parallelpix.png') }}"
+    >
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+
+</head>
+
+<body class="auth-body">
+
+    <div class="auth-wrapper">
+
+        <!-- LEFT PANEL -->
+
+        <div class="auth-brand-panel">
+
+            <div class="auth-brand">
+
+                <div class="auth-logo">
+                    P
+                </div>
+
+                <span>
+                    ParallelPix
+                </span>
+
+            </div>
+
+            <div class="auth-brand-content">
+
+                <span class="auth-small-title">
+                    PARALLEL IMAGE PROCESSING
+                </span>
+
+                <h1>
+                    Build.
+                    <span>Process. Analyze.</span>
+                </h1>
+
+                <p>
+                    Create your ParallelPix account and
+                    explore parallel image processing,
+                    worker-based execution, and performance
+                    analysis.
+                </p>
+
+                <div class="auth-feature-list">
+
+                    <div>
+                        <span>✓</span>
+                        Data Parallelism
+                    </div>
+
+                    <div>
+                        <span>✓</span>
+                        Task Pipeline
+                    </div>
+
+                    <div>
+                        <span>✓</span>
+                        Performance Analysis
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- REGISTER FORM -->
+
+        <div class="auth-form-panel">
+
+            <div class="auth-form-container register-container">
+
+                <div class="mobile-auth-brand">
+
+                    <div class="auth-logo">
+                        P
+                    </div>
+
+                    <span>
+                        ParallelPix
+                    </span>
+
+                </div>
+
+
+                <div class="auth-heading">
+
+                    <span class="auth-label">
+                        GET STARTED
+                    </span>
+
+                    <h2>
+                        Create your account
+                    </h2>
+
+                    <p>
+                        Register to start using ParallelPix.
+                    </p>
+
+                </div>
+
+
+                {% if error %}
+
+                <div class="auth-error">
+                    {{ error }}
+                </div>
+
+                {% endif %}
+
+
+                <form
+                    method="POST"
+                    action="{{ url_for('register') }}"
+                >
+
+                    <div class="form-group">
+
+                        <label for="fullname">
+                            Full Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="fullname"
+                            name="fullname"
+                            placeholder="Enter your full name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            Email Address
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Enter your email"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="username">
+                            Username
+                        </label>
+
+                        <input
+                            type="text"
+                            id="username"
+                            name="username"
+                            placeholder="Create a username"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="password">
+                            Password
+                        </label>
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Create a password"
+                            required
+                        >
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="auth-submit"
+                    >
+                        Create Account
+                        <span>→</span>
+                    </button>
+
+                </form>
+
+
+                <p class="auth-switch">
+
+                    Already have an account?
+
+                    <a href="{{ url_for('login') }}">
+                        Sign in
+                    </a>
+
+                </p>
+
+
+                <a
+                    href="{{ url_for('index') }}"
+                    class="back-home"
+                >
+                    ← Back to Home
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
