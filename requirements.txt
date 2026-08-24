@@ -1,4 +1,4 @@
-﻿Flask
+Flask
 mysql-connector-python
 Flask-Bcrypt
 Pillow
